@@ -1,0 +1,26 @@
+{
+    "name": "fin-vsc",
+    "displayName": "Fin",
+    "description": "VSCode language and LSP support for Fin",
+    "version": "0.0.0",
+    "publisher": "maxine-bonnette",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "fin",
+            "aliases": ["Fin", "fin"],
+            "extensions": [".fn", ".FN"],
+            "configuration": "./fin-config.json"
+        }],
+        "grammars": [{
+            "language": "fin",
+            "scopeName": "source.fin",
+            "path": "./syntaxes/fin.tmLanguage.json"
+        }]
+    }
+}

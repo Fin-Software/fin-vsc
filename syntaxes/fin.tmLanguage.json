@@ -1,0 +1,87 @@
+{
+    "scopeName": "source.fin",
+    "fileTypes": ["fn"],
+    "repository": {
+        "comments": {
+            "patterns": [{
+                "name": "comment.documentation.triple-semicolon.fin", "match": ";;;.*$"
+            },
+            {
+                "name": "comment.line.double-semicolon.fin", "match": ";;[^;].*$"
+            }]
+        },
+        "calls": {
+            "name": "entity.name.function.call.fin", "match": "\\b(?!(?:and|continue|defer|do|else|emit|elseif|fall|for|fin|goto|if|or|orelse|rescue|return|syntax|this|trait|module|unreachable|while|where|demands|inline|unroll)\\b)[A-Za-z_]\\w*(?=\\()"
+        },
+        "types": {
+            "patterns": [{
+                "name": "storage.type.builtin.fin",
+                "match": "\\b(?:void|bool|u8|i8|u16|i16|u32|i32|u64|i64|u128|i128|uptr|iptr|f16|bf16|f32|f64|type|error|enum|lexeme)\\b"
+            },
+            {
+                "name": "storage.type.builtin.fin",
+                "match": "[A-Za-z_]\\w*(?=\\s*#?[A-Za-z_]\\w*\\()"
+            }]
+        },
+        "nominal-operators": {
+            "patterns": [{
+                "name": "keyword.control.fin",
+                "match": "\\b(?:and|continue|defer|do|else|emit|elseif|fall|for|fin|goto|if|or|orelse|rescue|return|syntax|this|trait|module|unreachable|while|where|demands|inline|unroll)\\b"
+            },
+            {
+                "begin": "\\)",
+                "end": "(?=(?!\\b(?:div|inline|linked|linkable|naked|noreturn)\\b)(?:\\S|\\z))",
+                "patterns": [{ "name": "storage.modifier.function.fin", "match": "\\S+" }]
+            },
+            {
+                "name": "storage.modifier.storage-class.fin", "match": "\\b(?:mut|align|static|alias|dyn)\\b"
+            },
+            {
+                "name": "keyword.other.fin", "match": "@[A-Za-z_]\\w*"
+            }]
+        },
+        "symbolic-operators": {
+            "patterns": [{
+                "name": "keyword.operator.fin",
+                "match": "(?:(?=\\!)error|\\.sizeof\\b|\\.type\\b|\\.len\\b|\\.\\.\\.|\\.\\.|>>=|>>|>=|>|<<=|<<|<=|<|\\*%\\=|\\*%|\\*\\=|\\*\\*|\\*|\\+%\\=|\\+%|\\+\\=|\\+\\+|\\+|-%\\=|-%|\\-\\=|\\-|&=|&|%=|%|\\^=|\\^|\\/=|/|\\|=|!=|!|==|\\:=|=|\\?|#|\\$)"
+            },
+            {
+                "name": "keyword.operator.fin", "match": "(?:(?<=\\s)\\|(?=\\s)|(?<=\\S)\\|(?=\\S))"
+            }]
+        },
+        "constants-enums-labels": {
+            "patterns": [{
+                "name": "constant.language.fin", "match": "\\b(?:true|false|null|undefined)\\b"
+            },
+            {
+                "name": "constant.language.fin", "match": "(?<!\\w)\\.[A-Z][A-Za-z0-9]*\\b"
+            },
+            {
+                "name": "constant.language.fin", "match": "\\b[A-Z][A-Z0-9_]*\\b"
+            }]
+        },
+        "numbers": {
+            "patterns": [{
+                "name": "constant.numeric.fin", "match": "\\b0b[01]('?[01])*\\b"
+            },
+            {
+                "name": "constant.numeric.fin", "match": "\\b0o[0-7]('?[0-7])*\\b"
+            },
+            {
+                "name": "constant.numeric.fin", "match": "\\b0x[0-9A-Fa-f]('?[0-9A-Fa-f])*\\b"
+            },
+            {
+                "name": "constant.numeric.fin", "match": "\\b\\d('?\\d)*(?:\\.\\d('?\\d)*)?(?:[eE][+-]?\\d('?\\d)*)?\\b"
+            }]
+        }
+    },
+    "patterns": [
+        { "include": "#comments" },
+        { "include": "#calls" },
+        { "include": "#types" },
+        { "include": "#nominal-operators" },
+        { "include": "#symbolic-operators" },
+        { "include": "#constants-enums-labels" },
+        { "include": "#numbers" }
+    ]
+}
