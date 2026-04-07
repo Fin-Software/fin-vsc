@@ -11,12 +11,12 @@
             }]
         },
         "calls": {
-            "name": "entity.name.function.call.fin", "match": "\\b(?!(?:and|continue|defer|do|else|emit|elseif|fall|for|fin|goto|if|or|orelse|rescue|return|syntax|this|trait|module|unreachable|while|where|demands|inline|unroll)\\b)[A-Za-z_]\\w*(?=\\()"
+            "name": "entity.name.function.call.fin", "match": "\\b(?!(?:and|continue|defer|else|elseif|extend|fallt|for|fin|goto|if|impl|interface|or|orelse|rescue|return|struct|switch|module|unreachable|while|needs|inline|unroll)\\b)[A-Za-z_]\\w*(?=\\()"
         },
         "types": {
             "patterns": [{
                 "name": "storage.type.builtin.fin",
-                "match": "\\b(?:void|bool|u8|i8|u16|i16|u32|i32|u64|i64|u128|i128|uptr|iptr|f16|bf16|f32|f64|type|error|enum|lexeme)\\b"
+                "match": "\\b(?:void|bool|char|u8|i8|u16|i16|int|u32|u64|i64|u128|i128|uword|word|f16|bf16|f32|f64|error|enum)\\b"
             },
             {
                 "name": "storage.type.builtin.fin",
@@ -26,7 +26,7 @@
         "nominal-operators": {
             "patterns": [{
                 "name": "keyword.control.fin",
-                "match": "\\b(?:and|continue|defer|do|else|emit|elseif|fall|for|fin|goto|if|or|orelse|rescue|return|syntax|this|trait|module|unreachable|while|where|demands|inline|unroll)\\b"
+                "match": "\\b(?:and|continue|defer|else|elseif|extend|fallt|for|fin|goto|if|impl|interface|or|orelse|rescue|return|struct|switch|module|unreachable|while|needs|inline|unroll)\\b"
             },
             {
                 "begin": "\\)",
@@ -34,7 +34,7 @@
                 "patterns": [{ "name": "storage.modifier.function.fin", "match": "\\S+" }]
             },
             {
-                "name": "storage.modifier.storage-class.fin", "match": "\\b(?:mut|align|static|alias|dyn)\\b"
+                "name": "storage.modifier.storage-class.fin", "match": "\\b(?:align|alias|dyn)\\b"
             },
             {
                 "name": "keyword.other.fin", "match": "@[A-Za-z_]\\w*"
