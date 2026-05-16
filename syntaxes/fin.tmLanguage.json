@@ -2,36 +2,24 @@
     "scopeName": "source.fin",
     "fileTypes": ["fn"],
     "repository": {
+        "block_comment": {
+            "name": "comment.block.fin", "begin": "<><", "end": "><>", "patterns": [{ "include": "#block_comment" }]
+        },
         "comments": {
             "patterns": [{
-                "name": "comment.documentation.triple-semicolon.fin", "match": ";;;.*$"
+                "include": "#block_comment"
             },
             {
-                "name": "comment.line.double-semicolon.fin", "match": ";;[^;].*$"
-            }]
-        },
-        "calls": {
-            "name": "entity.name.function.call.fin", "match": "\\b(?!(?:and|continue|defer|else|elseif|extend|fallt|for|fin|goto|if|impl|interface|or|orelse|rescue|return|struct|switch|module|unreachable|while|needs|inline|unroll)\\b)[A-Za-z_]\\w*(?=\\()"
-        },
-        "types": {
-            "patterns": [{
-                "name": "storage.type.builtin.fin",
-                "match": "\\b(?:void|bool|char|u8|i8|u16|i16|int|u32|u64|i64|u128|i128|uword|word|f16|bf16|f32|f64|error|enum)\\b"
+                "name": "comment.block.javadoc", "begin": "\\(%", "end": "%\\)"
             },
             {
-                "name": "storage.type.builtin.fin",
-                "match": "[A-Za-z_]\\w*(?=\\s*#?[A-Za-z_]\\w*\\()"
+                "name": "comment.line.fin", "match": "##.*$"
             }]
         },
         "nominal-operators": {
             "patterns": [{
                 "name": "keyword.control.fin",
-                "match": "\\b(?:and|continue|defer|else|elseif|extend|fallt|for|fin|goto|if|impl|interface|or|orelse|rescue|return|struct|switch|module|unreachable|while|needs|inline|unroll)\\b"
-            },
-            {
-                "begin": "\\)",
-                "end": "(?=(?!\\b(?:div|inline|linked|linkable|naked|noreturn)\\b)(?:\\S|\\z))",
-                "patterns": [{ "name": "storage.modifier.function.fin", "match": "\\S+" }]
+                "match": "\\b(?:and|continue|defer|else|elseif|enum|extend|fallt|for|fin|if|impl|interface|or|orelse|rescue|return|struct|switch|module|unreachable|while|needs|inline|unroll)\\b"
             },
             {
                 "name": "storage.modifier.storage-class.fin", "match": "\\b(?:align|alias|dyn)\\b"
@@ -40,24 +28,37 @@
                 "name": "keyword.other.fin", "match": "@[A-Za-z_]\\w*"
             }]
         },
-        "symbolic-operators": {
-            "patterns": [{
-                "name": "keyword.operator.fin",
-                "match": "(?:(?=\\!)error|\\.sizeof\\b|\\.type\\b|\\.len\\b|\\.\\.\\.|\\.\\.|>>=|>>|>=|>|<<=|<<|<=|<|\\*%\\=|\\*%|\\*\\=|\\*\\*|\\*|\\+%\\=|\\+%|\\+\\=|\\+\\+|\\+|-%\\=|-%|\\-\\=|\\-|&=|&|%=|%|\\^=|\\^|\\/=|/|\\|=|!=|!|==|\\:=|=|\\?|#|\\$)"
-            },
-            {
-                "name": "keyword.operator.fin", "match": "(?:(?<=\\s)\\|(?=\\s)|(?<=\\S)\\|(?=\\S))"
-            }]
-        },
-        "constants-enums-labels": {
+        "constants-faults": {
             "patterns": [{
                 "name": "constant.language.fin", "match": "\\b(?:true|false|null|undefined)\\b"
             },
             {
-                "name": "constant.language.fin", "match": "(?<!\\w)\\.[A-Z][A-Za-z0-9]*\\b"
+                "name": "constant.language.fin", "match": "\\b[A-Z][A-Za-z0-9]*#"
             },
             {
                 "name": "constant.language.fin", "match": "\\b[A-Z][A-Z0-9_]*\\b"
+            }]
+        },
+        "types": {
+            "patterns": [{
+                "name": "entity.name.type.fin",
+                "match": "\\b(?:void|bool|char|u8|i8|u16|i16|int|u32|rune|u64|i64|u128|i128|ureg|reg|f16|bf16|f32|f64|any)\\b"
+            },
+            {
+                "name": "entity.name.type.fin",
+                "match": "\\b[A-Z]\\w*"
+            }]
+        },
+        "calls": {
+            "name": "entity.name.function.call.fin", "match": "\\w+(?=\\()"
+        },
+        "symbolic-operators": {
+            "patterns": [{
+                "name": "keyword.operator.fin",
+                "match": "(?:\\.sizeof\\b|\\.type\\b|\\.len\\b|\\.\\.\\.|\\.\\.|>>=|>>|>=|>|<<=|<<|<=|<|\\*%\\=|\\*%|\\*\\=|\\*\\*|\\*|\\+%\\=|\\+%|\\+\\=|\\+\\+|\\+|-%\\=|-%|\\-\\=|\\-|&=|&|%=|%|\\^=|\\^|\\/=|/|\\|=|!=|!|==|=|\\?|#)"
+            },
+            {
+                "name": "keyword.operator.fin", "match": "(?:(?<=\\s)\\|(?=\\s)|(?<=\\S)\\|(?=\\S))"
             }]
         },
         "numbers": {
@@ -77,11 +78,11 @@
     },
     "patterns": [
         { "include": "#comments" },
-        { "include": "#calls" },
-        { "include": "#types" },
         { "include": "#nominal-operators" },
+        { "include": "#constants-faults" },
+        { "include": "#types" },
+        { "include": "#calls" },
         { "include": "#symbolic-operators" },
-        { "include": "#constants-enums-labels" },
         { "include": "#numbers" }
     ]
 }
